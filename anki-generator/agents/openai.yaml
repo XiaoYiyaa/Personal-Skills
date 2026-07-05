@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anki题目生成器"
+  short_description: "将题库文件转换为Anki导入格式，支持xlsx/toml/csv，自动生成cloze填空"
+  default_prompt: "帮我把这个题库文件转成Anki可以导入的格式"
