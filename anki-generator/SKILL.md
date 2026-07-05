@@ -57,6 +57,13 @@ id	question	options	answer	notes
 输出文件后，提醒用户：
 > 导入Anki时请选择 **AwesomeSelect-3.x** 模板
 
+## 依赖说明
+
+本 skill 生成的导入文件依赖 Anki 选择题模版：
+- 仓库地址：[git9527/anki-awesome-select](https://github.com/git9527/anki-awesome-select)
+- 模板名称：AwesomeSelect-3.x
+- 安装方式：从仓库下载并导入 Anki
+
 ## 脚本使用
 
 对于批量处理，可使用 `scripts/convert.py`：
