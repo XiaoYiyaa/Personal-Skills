@@ -48,7 +48,8 @@ def parse_toml(file_path):
     questions = []
     for q in data.get('questions', []):
         options = q.get('options', [])
-        options_text = '|'.join([f"{opt['letter']}. {opt['text']}" for opt in options])
+        # 只取选项内容，不带A./B.前缀
+        options_text = '|'.join([opt.get('text', '') for opt in options])
         questions.append({
             'number': q.get('number'),
             'type': q.get('type'),
@@ -60,13 +61,17 @@ def parse_toml(file_path):
 
 
 def clean_options(options_raw):
-    """清理选项文本"""
+    """清理选项文本，去掉A./B./C./D.等前缀，只保留选项内容"""
     options = [opt.strip() for opt in options_raw.split('|')]
     cleaned = []
     for opt in options:
         clean = opt.strip()
-        if clean.startswith(('A.', 'B.', 'C.', 'D.', 'E.', 'F.')):
-            clean = clean[2:].strip()
+        # 去掉选项前缀：A. B. C. D. E. F. 或 A、 B、 等
+        for prefix in ['A.', 'B.', 'C.', 'D.', 'E.', 'F.', 'A、', 'B、', 'C、', 'D、', 'E、', 'F、']:
+            if clean.startswith(prefix):
+                clean = clean[len(prefix):].strip()
+                break
+        # 合并多余空格
         clean = ' '.join(clean.split())
         if clean:
             cleaned.append(clean)
