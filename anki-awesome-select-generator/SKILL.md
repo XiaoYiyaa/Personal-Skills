@@ -57,7 +57,7 @@ options:
 
 支持格式：
 - **xlsx**：使用openpyxl读取，识别列：题号、类型、题目、选项、答案
-- **toml**：使用tomllib读取，结构：questions[].{number, type, stem, answer, options, notes/analysis}（notes或analysis字段为答案解释，可选）
+- **toml**：使用tomllib读取，结构：questions[].{number, type, stem, answer, options, notes}（notes字段为答案解释，可选）
 - **csv**：标准CSV格式
 - **txt**：自定义分隔符格式
 

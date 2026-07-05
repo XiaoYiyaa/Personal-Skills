@@ -48,7 +48,7 @@ tags: 标签
 
 转换时需检查输入文件是否包含答案解释：
 - **xlsx**：检查第6列（F列）是否有内容
-- **toml**：检查questions[].notes或questions[].analysis字段是否存在
+- **toml**：检查questions[].notes字段是否存在
 - **csv/txt**：检查是否有额外列包含解释内容
 
 若输入文件有答案解释，询问用户是否使用现有解析：

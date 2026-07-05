@@ -51,15 +51,13 @@ def parse_toml(file_path):
         options = q.get('options', [])
         # 只取选项内容，不带A./B.前缀
         options_text = '|'.join([opt.get('text', '') for opt in options])
-        # 兼容notes和analysis字段
-        notes = q.get('notes', '') or q.get('analysis', '')
         questions.append({
             'number': q.get('number'),
             'type': q.get('type'),
             'stem': q.get('stem', ''),
             'options_raw': options_text,
             'answer': q.get('answer', ''),
-            'notes': notes
+            'notes': q.get('notes', '')
         })
     return questions
 
