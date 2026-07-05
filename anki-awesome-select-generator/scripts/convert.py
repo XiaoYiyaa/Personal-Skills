@@ -104,6 +104,24 @@ def format_question(q, cloze='{{c1::【】}}'):
     return stem
 
 
+def sanitize_tag(tag):
+    """清理标签格式，确保每个标签以一级标签开头，层级内无空格"""
+    if not tag:
+        return tag
+    
+    # 按空格分割成多个标签
+    tags = tag.strip().split()
+    sanitized = []
+    
+    for t in tags:
+        # 将层级内的空格替换为下划线（保留::作为层级分隔符）
+        parts = t.split('::')
+        parts = [p.replace(' ', '_') for p in parts]
+        sanitized.append('::'.join(parts))
+    
+    return ' '.join(sanitized)
+
+
 def convert_to_anki(questions, start_id=1, tag=''):
     """转换为Anki格式"""
     answer_map = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5}
@@ -139,7 +157,8 @@ def convert_to_anki(questions, start_id=1, tag=''):
         notes = notes.replace('\t', ' ').replace('\n', ' ')
         
         # 字段顺序: id question options answer notes tags
-        lines.append(f"{current_id}\t{stem}\t{options_text}\t{answer_num}\t{notes}\t{tag}")
+        sanitized_tag = sanitize_tag(tag)
+        lines.append(f"{current_id}\t{stem}\t{options_text}\t{answer_num}\t{notes}\t{sanitized_tag}")
         current_id += 1
     
     return lines, current_id
