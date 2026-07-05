@@ -6,7 +6,7 @@
 
 | Skill | 描述 |
 |-------|------|
-| [anki-generator](./anki-generator) | 题库转Anki导入文件，支持xlsx/toml/csv，自动生成cloze填空 |
+| [anki-awesome-select-generator](./anki-awesome-select-generator) | 选择判断题转Anki卡片，依赖AwesomeSelect模板，支持多级标签和答案解析 |
 
 
 
