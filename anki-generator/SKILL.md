@@ -1,5 +1,5 @@
 ---
-name: anki-generator
+name: anki-awesome-select-generator
 description: 将选择判断题（xlsx/toml/csv/txt等任意格式）转换为Anki导入txt文件，支持单选、多选、判断题型，自动生成cloze填空格式。使用场景：用户需要将题库文件转换为可导入Anki的格式，创建新牌组或追加到已有牌组，支持多章节管理和智能标签。
 ---
 
