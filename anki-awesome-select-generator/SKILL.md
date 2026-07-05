@@ -46,7 +46,9 @@ options:
 
 **d. 答案解释（notes字段）**
 - 先检测输入文件是否已包含答案解释字段
-- 若已包含：直接使用
+- 若已包含：询问用户是否使用现有解析
+  - 使用现有解析：直接使用文件中的答案解释
+  - 不使用解析：留空
 - 若未包含：询问用户是否补充答案解释
   - 是：搜索相关资料补充（⚠️ 会消耗较多token）
   - 否：留空
@@ -55,7 +57,7 @@ options:
 
 支持格式：
 - **xlsx**：使用openpyxl读取，识别列：题号、类型、题目、选项、答案
-- **toml**：使用tomllib读取，结构：questions[].{number, type, stem, answer, options}
+- **toml**：使用tomllib读取，结构：questions[].{number, type, stem, answer, options, notes/analysis}（notes或analysis字段为答案解释，可选）
 - **csv**：标准CSV格式
 - **txt**：自定义分隔符格式
 
