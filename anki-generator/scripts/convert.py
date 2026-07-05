@@ -29,7 +29,8 @@ def parse_xlsx(file_path):
             'type': row[1],
             'stem': row[2] or '',
             'options_raw': row[3] or '',
-            'answer': row[4] or ''
+            'answer': row[4] or '',
+            'notes': row[5] or '' if len(row) > 5 else ''
         })
     return questions
 
@@ -55,7 +56,8 @@ def parse_toml(file_path):
             'type': q.get('type'),
             'stem': q.get('stem', ''),
             'options_raw': options_text,
-            'answer': q.get('answer', '')
+            'answer': q.get('answer', ''),
+            'notes': q.get('notes', '')
         })
     return questions
 
@@ -113,6 +115,7 @@ def convert_to_anki(questions, start_id=1, tag=''):
         q_type = q['type']
         options = clean_options(q['options_raw'])
         answer_raw = q['answer']
+        notes = q.get('notes', '')
         
         # 格式化题干
         stem = format_question(q)
@@ -133,8 +136,10 @@ def convert_to_anki(questions, start_id=1, tag=''):
         # 清理特殊字符
         stem = stem.replace('\t', ' ').replace('\n', ' ')
         options_text = options_text.replace('\t', ' ').replace('\n', ' ')
+        notes = notes.replace('\t', ' ').replace('\n', ' ')
         
-        lines.append(f"{current_id}\t{stem}\t{options_text}\t{answer_num}\t{tag}")
+        # 字段顺序: id question options answer notes tags
+        lines.append(f"{current_id}\t{stem}\t{options_text}\t{answer_num}\t{notes}\t{tag}")
         current_id += 1
     
     return lines, current_id
